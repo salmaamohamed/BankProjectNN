@@ -338,7 +338,7 @@ with tab1:
                             label="Prediction",
                             value="YES" if prediction == 1 else "NO",
                             delta=f"Confidence: {max(proba)*100:.1f}%",
-                            delta_color="normal" if prediction == 1 else "inverse"
+                            delta_color="normal" if prediction == 1 else "off"
                         )
                     
                     with result_col2:
