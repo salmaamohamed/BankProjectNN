@@ -31,7 +31,6 @@ elif model_choice == "Logistic Regression (GridSearch)":
     model = load_model("logistic_regression_model_withGridSearch.joblib")
 elif model_choice == "Random Forest (GridSearch)":
     model = load_model("random_forest_model_withGridSearch.joblib")
-
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
 job = st.selectbox(
     "Job",
@@ -47,7 +46,7 @@ education = st.selectbox(
 default = st.selectbox("Credit in Default?", ["yes", "no"])
 housing = st.selectbox("Housing Loan?", ["yes", "no"])
 loan = st.selectbox("Personal Loan?", ["yes", "no"])
-balance = st.number_input("Account Balance", value=0)
+LogBalance = st.number_input("Account Balance", value=0)
 contact = st.selectbox("Contact Type", ["cellular", "telephone", "unknown"])
 day = st.number_input("Last Contact Day", min_value=1, max_value=31, value=15)
 month = st.selectbox(
@@ -55,7 +54,7 @@ month = st.selectbox(
     ["jan", "feb", "mar", "apr", "may", "jun",
      "jul", "aug", "sep", "oct", "nov", "dec"]
 )
-duration = st.number_input("Call Duration (seconds)", value=100)
+LogDuration = st.number_input("Call Duration (seconds)", value=100)
 campaign = st.number_input("Number of Contacts (Campaign)", min_value=1, value=1)
 pdays = st.number_input("Days Since Last Contact", min_value=0, value=0)
 previous = st.number_input("Previous Contacts", min_value=0, value=0)
@@ -63,27 +62,23 @@ poutcome = st.selectbox(
     "Previous Campaign Outcome",
     ["success", "failure", "other", "unknown"]
 )
-input_data = pd.DataFrame([{
-    "age": age,
-    "balance": balance,
-    "duration": duration,
-}])
 
-
-#df
+# ----------------------
+# CREATE DATAFRAME
+# ----------------------
 input_data = pd.DataFrame([{
     "age": age,
     "job": job,
     "marital": marital,
     "education": education,
     "default": default,
-    "balance": balance,
+    "balance": LogBalance,
     "housing": housing,
     "loan": loan,
     "contact": contact,
     "day": day,
     "month": month,
-    "duration": duration,
+    "duration": LogDuration,
     "campaign": campaign,
     "pdays": pdays,
     "previous": previous,
