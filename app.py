@@ -32,43 +32,63 @@ elif model_choice == "Logistic Regression (GridSearch)":
 elif model_choice == "Random Forest (GridSearch)":
     model = load_model("random_forest_model_withGridSearch.joblib")
 
-# ----------------------
-# INPUT FIELDS
-# ----------------------
-st.sidebar.header("Input Customer Information")
+age = st.number_input("Age", min_value=18, max_value=100, value=30)
+job = st.selectbox(
+    "Job",
+    ["admin", "technician", "services", "management", "retired",
+     "blue-collar", "unemployed", "entrepreneur", "housemaid",
+     "self-employed", "student", "unknown"]
+)
+marital = st.selectbox("Marital Status", ["married", "single", "divorced"])
+education = st.selectbox(
+    "Education",
+    ["primary", "secondary", "tertiary", "unknown"]
+)
+default = st.selectbox("Credit in Default?", ["yes", "no"])
+housing = st.selectbox("Housing Loan?", ["yes", "no"])
+loan = st.selectbox("Personal Loan?", ["yes", "no"])
+balance = st.number_input("Account Balance", value=0)
+contact = st.selectbox("Contact Type", ["cellular", "telephone", "unknown"])
+day = st.number_input("Last Contact Day", min_value=1, max_value=31, value=15)
+month = st.selectbox(
+    "Last Contact Month",
+    ["jan", "feb", "mar", "apr", "may", "jun",
+     "jul", "aug", "sep", "oct", "nov", "dec"]
+)
+duration = st.number_input("Call Duration (seconds)", value=100)
+campaign = st.number_input("Number of Contacts (Campaign)", min_value=1, value=1)
+pdays = st.number_input("Days Since Last Contact", min_value=0, value=0)
+previous = st.number_input("Previous Contacts", min_value=0, value=0)
+poutcome = st.selectbox(
+    "Previous Campaign Outcome",
+    ["success", "failure", "other", "unknown"]
+)
+input_data = pd.DataFrame([{
+    "age": age,
+    "balance": balance,
+    "duration": duration,
+}])
 
-age = st.sidebar.number_input("Age", min_value=18, max_value=100, value=30)
-balance = st.sidebar.number_input("Balance", min_value=-5000, max_value=200000, value=500)
-duration = st.sidebar.number_input("Duration (seconds)", min_value=0, max_value=5000, value=120)
 
-job = st.sidebar.selectbox("Job", [
-    "admin.", "blue-collar", "entrepreneur", "housemaid",
-    "management", "retired", "self-employed", "services",
-    "student", "technician", "unemployed", "unknown"
-])
-
-marital = st.sidebar.selectbox("Marital Status", [
-    "single", "married", "divorced", "unknown"
-])
-
-education = st.sidebar.selectbox("Education", [
-    "primary", "secondary", "tertiary", "unknown"
-])
-
-contact = st.sidebar.selectbox("Contact Type", [
-    "cellular", "telephone"
-])
-
-input_data = pd.DataFrame({
-    "age": [age],
-    "balance": [balance],
-    "duration": [duration],
-    "job": [job],
-    "marital": [marital],
-    "education": [education],
-    "contact": [contact]
-})
-
+#df
+input_data = pd.DataFrame([{
+    "age": age,
+    "job": job,
+    "marital": marital,
+    "education": education,
+    "default": default,
+    "balance": balance,
+    "housing": housing,
+    "loan": loan,
+    "contact": contact,
+    "day": day,
+    "month": month,
+    "duration": duration,
+    "campaign": campaign,
+    "pdays": pdays,
+    "previous": previous,
+    "poutcome": poutcome
+}])
 # ----------------------
 # PREDICTION
 # ----------------------
